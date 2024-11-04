@@ -7,7 +7,7 @@ per genre grouped by platforms. It should look like following
 
 
 ### How to obtain results
-1. **Prepare a dataframe with only neccessery data**
+1. **Prepare a dataframe with only necessary data**
 2. **Plot it :D**
 
 ### Tips
