@@ -17,7 +17,7 @@ class TestCase(unittest.TestCase):
 
         df = load_data(self.file_path)
         self.assertFalse(df.empty)
-        self.assertEqual(len(df.columns), 14)
+        self.assertEqual(len(df.columns), 16)
 
     def test_df_head(self):
         pd.testing.assert_frame_equal(self.df.head(10), df_head(self.df))

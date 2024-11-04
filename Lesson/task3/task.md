@@ -1,135 +1,81 @@
-# Working with DataFrames in Pandas
+# Plotting Data with Seaborn
 
-In the previous section, we introduced Pandas, discussed its main data structure, 
-the DataFrame, and reviewed how to load data from a CSV file. 
-Now, let’s dive deeper into DataFrames and learn how to manipulate and retrieve 
-data effectively. Mastering these DataFrame operations will allow you to analyze data
-more efficiently. 
+In the previous chapters, we explored how to manipulate and retrieve data from DataFrames using Pandas. Data visualization is an essential part of data analysis, as it helps in understanding trends, patterns, and insights that might not be immediately apparent from the raw data. In this chapter, we will learn how to create various types of plots using Seaborn, a powerful visualization library built on top of Matplotlib that provides a high-level interface for drawing attractive statistical graphics.
 
-### Selecting Data in DataFrames
-
-DataFrames allow you to easily access specific columns and rows.
-
-**Selecting Columns**
-
-To select a single column, use square brackets with the column name. This returns a Series (a single-column data structure).
-
-Example:
+In this task, you will use matplotlib and seaborn as primary visualization libraries.
 ```python
-names = df['name']
-print(names)
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 ```
 
-To select multiple columns, pass a list of column names. This will return another DataFrame.
+### Basic Plotting with Seaborn
 
-Example:
+Seaborn provides a variety of plotting functions that can be used directly with Pandas DataFrames.
+
+### Line Plot
+
+Line plots are used to visualize data points over a continuous interval. Here’s how to create a simple line plot using Seaborn:
+
 ```python
-name_and_platform = df[['name', 'platform']]
-print(name_and_platform)
+sns.lineplot(data=df, x='year', y='global_sales')
+plt.title('Global Sales Over Years')
+plt.xlabel('Year')
+plt.ylabel('Global Sales (in millions)')
+plt.show()
 ```
 
+### Bar Plot
 
-**Selecting Rows**:
+Bar plots are useful for comparing quantities associated with different groups. Here’s how to create a bar plot:
 
-You can access rows using:
-- iloc: For row selection by index.
-- loc: For row selection by labels.
-
-Example:
 ```python
-first_row = df.iloc[0]
-print(first_row)
-
-alice_row = df.loc[df['name'] == 'Destiny']
-print(alice_row)
+sns.barplot(x='platform', y='global_sales', data=df, estimator=sum, ci=None)
+plt.title('Total Global Sales by Platform')
+plt.xlabel('Platform')
+plt.ylabel('Total Global Sales (in millions)')
+plt.xticks(rotation=45)
+plt.show()
 ```
 
+### Histogram
 
-### Accessing Specific Values
+Histograms are great for visualizing the distribution of a dataset. You can create a histogram of the 'global_sales' column like this:
 
-For direct access to specific values within a DataFrame, combine loc or iloc with column selection.
-
-Example:
 ```python
-second_game = df.iloc[1]['name']
-print(second_game)
-
-game_platform = df.loc[df['name'] == second_game, 'platform'].values[0]
-print(bob_age)
+sns.histplot(df['global_sales'], bins=30, kde=True)
+plt.title('Distribution of Global Sales')
+plt.xlabel('Global Sales (in millions)')
+plt.show()
 ```
 
+### Scatter Plot
 
-### Filtering Data with Conditions
+Scatter plots are useful for observing the relationship between two numeric variables. Here’s how to create a scatter plot:
 
-Filtering lets you retrieve only the rows that meet specific criteria.
-
-**Basic Filtering**:
-
-Example:
 ```python
-sales_above_10 = df[df['global_sales'] > 10]
-print(sales_above_10)
+sns.scatterplot(x='critic_score', y='global_sales', data=df)
+plt.title('Global Sales vs. Critic Score')
+plt.xlabel('Critic Score')
+plt.ylabel('Global Sales (in millions)')
+plt.show()
 ```
 
+### Customizing Plots
 
-**Combining Conditions**:
+Seaborn allows for extensive customization of plots:
 
-You can combine conditions with & (and) or | (or).
+- **Color Palettes**: You can change the color palette using `sns.set_palette()`.
+- **Themes**: Seaborn comes with several built-in themes that can be applied using `sns.set_style()`.
 
-Example:
+Example of a customized plot:
+
 ```python
-filtered_data = df[(df['global_sales'] > 10) & (df['platform'] == 'PS4')]
-print(filtered_data)
+sns.set_theme(style="whitegrid")
+sns.barplot(x='platform', y='global_sales', data=df, estimator=sum, ci=None, palette='Blues')
+plt.title('Total Global Sales by Platform')
+plt.xlabel('Platform')
+plt.ylabel('Total Global Sales (in millions)')
+plt.xticks(rotation=45)
+plt.show()
 ```
-
-**Using isin to Filter by Multiple Values**:
-
-The isin function is helpful for filtering by multiple values in a column.
-
-Example:
-```python
-selected_cities = df[df['platform'].isin(['PS4', 'XOne'])]
-print(selected_cities)
-```
-
-
-### Basic Data Manipulation
-
-Pandas makes it easy to modify your DataFrame.
-
-**Adding Columns**:
-
-You can add new columns by simply assigning values to a new column name.
-
-Example:
-```python
-df['myscore'] = '2'
-```
-
-
-**Modifying Existing Columns**:
-
-To modify a column, apply operations directly.
-
-Example:
-```python
-df['global_sales'] = df['global_sales'] + 1
-```
-
-
-**Dropping Rows or Columns**:
-
-Use drop() to remove rows or columns.
-
-Example for dropping a column:
-```python
-df = df.drop('critic_count', axis=1)
-```
-
-
-Example for dropping a row:
-```python
-df = df.drop(0, axis=0)
-```
-
-
