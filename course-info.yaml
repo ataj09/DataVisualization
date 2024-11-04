@@ -1,8 +1,7 @@
 type: marketplace
-title: JetBrains Academy Python course template
+title: Data Visualization in Python in-IDE
 language: English
-summary: Here you can put the course description. You can use HTML tags inside the
-  description.
+summary: Quick data science begginer course with pandas, matplotlib and seaborn
 programming_language: Python
 environment: unittest
 content:
