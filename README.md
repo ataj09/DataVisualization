@@ -8,5 +8,5 @@ Course is divided into four tasks.
 ## Structure
 1. **Welcome to Pandas**: Loading data into dataframes and basic overview.
 2. **Befriend dataframes**: Methods used for processing and analyzing dataframes
-3. **Data Visualization**: How to `see` our data.
+3. **Data Visualization**: How to *see* our data.
 4. **Final Task**: Exercise that utilizes learned methods.
