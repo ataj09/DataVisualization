@@ -1,0 +1,15 @@
+type: edu
+custom_name: Data Visualization
+files:
+  - name: __init__.py
+    visible: false
+    propagatable: false
+  - name: main.py
+    visible: true
+    propagatable: false
+  - name: tests/test.py
+    visible: true
+    propagatable: false
+  - name: tests/__init__.py
+    visible: false
+    propagatable: false
