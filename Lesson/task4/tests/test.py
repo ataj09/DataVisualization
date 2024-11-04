@@ -8,18 +8,15 @@ class TestFinalTask(unittest.TestCase):
         self.file_path = '../../common/dataset.csv'
         self.df = pd.read_csv(self.file_path)
 
-    def test_platform_genre_counts_correct_values(self):
+    def test_get_grouped(self):
 
         self.df = self.df[self.df['platform'].isin(['PS4', 'XOne', 'PC', 'WiiU'])]
         result = get_grouped(self.df)
-        expected = self.df.groupby(['platform', 'genre']).size().reset_index(name='count')
-        pd.testing.assert_frame_equal(result, expected)
+        expected_values = self.df.groupby(['platform', 'genre']).size().reset_index(name='count')
 
-    def test_check_columns(self):
-
-        df = self.df[self.df['platform'].isin(['PS4', 'XOne', 'PC', 'WiiU'])]
-        result = get_grouped(df)
+        pd.testing.assert_frame_equal(result, expected_values)
         self.assertListEqual(list(result.columns), ['platform', 'genre', 'count'])
+
 
     def test_plot_games_per_genre_grouped_by_platform_correct_values(self):
 
